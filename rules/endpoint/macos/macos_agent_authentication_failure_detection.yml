@@ -3,20 +3,21 @@ id: 31f0f325-3844-47bc-8add-8386d50def8d
 status: experimental
 description: Elastic Agent - macos-security-events detection for failed login on main macbook login
 references:
-    - https://www.elastic.co/guide/en/security/current/endpoint-protection.html
+    - https://www.elastic.co/docs/reference/integrations/macos
 author: Caden Anton
-date: 2026/08/21
+date: 2026/09/09
 tags:
-    - attack.t1110
+    - attack.t1110.001
+    - attack.credential-access
 logsource:
-    product: elastic
-    service: endpoint
+    product: macos
+    service: authentication
 detection:
     selection:
         data_stream.dataset: 'macos.authentication'
         event.module: 'macos'
     selection_startswith:
-        message|startswith: 'Authentication failed for'
+        macos.event.message.description|startswith: 'Authentication failed for'
     condition: selection and selection_startswith
 falsepositives:
     - Authenticated tests with Macbook enpoint for failed passwords
