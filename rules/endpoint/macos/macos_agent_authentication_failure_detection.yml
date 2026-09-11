@@ -14,11 +14,10 @@ logsource:
     service: authentication
 detection:
     selection:
-        data_stream.dataset: 'macos.authentication'
-        event.module: 'macos'
-    selection_startswith:
+        event.dataset: 'macos.authentication'
+        macos.subsystem: 'com.apple.opendirectoryd'
         macos.event.message.description|startswith: 'Authentication failed for'
-    condition: selection and selection_startswith
+    condition: selection
 falsepositives:
     - Authenticated tests with Macbook enpoint for failed passwords
     - Accidental password input
