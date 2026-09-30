@@ -17,7 +17,7 @@ detection:
         data_stream.dataset: 'macos.authentication'
         macos.subsystem: 'com.apple.opendirectoryd'
         macos.category: 'auth'
-        log.level: 'error'
+        macos.event.message.description|contains: 'console domain: invalid credentials'
     condition: selection
 falsepositives:
     - User mistyping a password at the lock screen or a sudo prompt
